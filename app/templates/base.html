@@ -1,88 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}Murilão Multimarcas{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C97E;
+      --gold-dim: #8a6f2e;
+      --dark-bg: #0e0e0e;
+      --dark-surface: #161616;
+      --dark-card: #1e1e1e;
+      --dark-border: rgba(201, 168, 76, 0.18);
+      --dark-border-hover: rgba(201, 168, 76, 0.45);
+      --text-primary: #f0ece3;
+      --text-secondary: #9e9a8e;
+      --text-muted: #5a5750;
+      --danger: #c0392b;
+      --danger-hover: #a93226;
+    }
+
     body {
-        font-family: 'Open Sans', sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
-        margin: 0;
-        padding: 0;
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* NAV */
     header {
-        background-color: #0096c7;
-        color: #fff;
-        text-align: center;
-    }
-
-    footer {
-        background-color: #ccc;
-        color: #333;
-        padding: 20px;
-        text-align: center;
+      background-color: var(--dark-surface);
+      border-bottom: 1px solid var(--dark-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     nav {
-        background-color: #0096c7;
-        color: #fff;
-        height: 50px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      display: block;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 300;
     }
 
     nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-    }
-
-    nav ul li {
-        margin: 0 10px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     nav ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        padding: 15px;
-        transition: all 0.3s ease;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
     }
 
     nav ul li a:hover {
-        background-color: #32bbe8;
+      color: var(--text-primary);
+      background-color: rgba(255,255,255,0.05);
     }
 
-    nav ul li.active a {
-        background-color: #666;
+    .nav-greeting {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 8px 14px;
+      letter-spacing: 0.05em;
     }
 
-    nav ul li.active a:hover {
-        background-color: #999;
+    .nav-btn-gold {
+      color: var(--gold) !important;
+      border: 1px solid var(--dark-border) !important;
     }
 
+    .nav-btn-gold:hover {
+      background-color: rgba(201, 168, 76, 0.1) !important;
+      border-color: var(--dark-border-hover) !important;
+      color: var(--gold-light) !important;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      padding: 40px 24px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--dark-surface);
+      border-top: 1px solid var(--dark-border);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+
+    footer span {
+      color: var(--gold-dim);
+    }
+
+    /* BOTÕES GLOBAIS */
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border: none;
+    }
+
+    .btn-gold {
+      background-color: var(--gold);
+      color: #0e0e0e;
+    }
+
+    .btn-gold:hover {
+      background-color: var(--gold-light);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--dark-border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--dark-border-hover);
+      color: var(--text-primary);
+      background-color: rgba(255,255,255,0.04);
+    }
+
+    .btn-danger {
+      background-color: transparent;
+      color: #e57373;
+      border: 1px solid rgba(192, 57, 43, 0.35);
+    }
+
+    .btn-danger:hover {
+      background-color: rgba(192, 57, 43, 0.12);
+      border-color: rgba(192, 57, 43, 0.6);
+    }
+
+    /* FORMULÁRIOS GLOBAIS */
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="file"],
+    select,
+    textarea {
+      background-color: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      color: var(--text-primary);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      width: 100%;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold-dim);
+    }
+
+    label {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .errorlist {
+      color: #e57373;
+      font-size: 0.8rem;
+      list-style: none;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; }
+      .nav-brand span { display: none; }
+      main { padding: 24px 16px; }
+    }
   </style>
 </head>
 <body>
   <header>
     <nav>
+      <a href="{% url 'cars_list' %}" class="nav-brand">
+        Murilão Multimarcas
+        <span>Revenda de Veículos</span>
+      </a>
       <ul>
         {% if user.is_authenticated %}
-          <li>Olá, {{ user.username }}</li>
-          <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li>
-        {% endif %}
-        {% if not user.is_authenticated %}
+          <li><span class="nav-greeting">Olá, {{ user.username }}</span></li>
+          <li><a href="{% url 'new_car' %}" class="nav-btn-gold">+ Cadastrar Carro</a></li>
+        {% else %}
           <li><a href="{% url 'register' %}">Cadastre-se</a></li>
           <li><a href="{% url 'login' %}">Login</a></li>
         {% endif %}
-
-        <li><a href="{% url 'cars_list' %}">Carros</a></li>
-
+        <li><a href="{% url 'cars_list' %}">Estoque</a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url 'logout' %}">Sair</a></li>
         {% endif %}
@@ -91,12 +252,11 @@
   </header>
 
   <main>
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
   </main>
 
   <footer>
-    <p>&copy; 2023 Murilão Multimarcas</p>
+    &copy; 2026 <span>Murilão Multimarcas</span> &mdash; Todos os direitos reservados
   </footer>
 </body>
 </html>

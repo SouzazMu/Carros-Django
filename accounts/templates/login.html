@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Login — Murilão Multimarcas{% endblock %}
+
+{% block content %}
+<style>
+  .auth-wrapper {
+    max-width: 400px;
+    margin: 60px auto;
+  }
+
+  .auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .auth-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .auth-header p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+  }
+
+  .auth-card {
+    background-color: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 10px;
+    padding: 32px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-group label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .form-group input {
+    width: 100%;
+    background-color: var(--dark-bg);
+    border: 1px solid var(--dark-border);
+    color: var(--text-primary);
+    border-radius: 6px;
+    padding: 11px 14px;
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus { outline: none; border-color: var(--gold-dim); }
+
+  .submit-btn {
+    width: 100%;
+    background-color: var(--gold);
+    color: #0e0e0e;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover { background-color: var(--gold-light); }
+
+  .auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .auth-footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .auth-footer a:hover { color: var(--gold-light); }
+
+  ul.errorlist {
+    color: #e57373;
+    font-size: 0.8rem;
+    list-style: none;
+    margin-top: 6px;
+  }
+</style>
+
+<div class="auth-wrapper">
+  <div class="auth-header">
+    <h1>Bem-vindo</h1>
+    <p>Acesse o painel de gerenciamento</p>
+  </div>
+
+  <div class="auth-card">
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_username">Usuário</label>
+        <input type="text" name="username" id="id_username" autofocus autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="id_password">Senha</label>
+        <input type="password" name="password" id="id_password" autocomplete="current-password">
+      </div>
+      {{ login_form.non_field_errors }}
+      <button type="submit" class="submit-btn">Entrar</button>
+    </form>
+  </div>
+
+  <p class="auth-footer">
+    Não tem conta? <a href="{% url 'register' %}">Cadastre-se</a>
+  </p>
+</div>
+{% endblock %}
